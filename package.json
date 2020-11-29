@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-   "scripts": {
-    "start": "node ./server.js"
+  "scripts": {
+    "start": "node .server/server.js"
+  },
+  "dependencies": {
+    "knex": "^0.21.12"
   }
 }
