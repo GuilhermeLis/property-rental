@@ -7,18 +7,22 @@ Para a execução desse projeto será necessário as seguintes ferramentas:
 
 - Obrigatórios
   - [Node](https://nodejs.org/en/)
-  - [PostgreSQL](https://www.postgresql.org/)
   - [Docker](https://docs.docker.com/)
+  - [PostgreSQL](https://www.postgresql.org/)
 
 <!-- TABLE OF CONTENTS -->
 
 ## Tabela de Conteúdo
 
+- [Docker](#docker)
 - [PostgresSQL](#postgressql)
   - [Iniciar Container](#iniciar-container)
   - [Parar Container](#parar-container)
-- [Docker](#docker)
 
+### Docker
+  Para a instalação do Docker siga as [instruções](https://docs.docker.com/engine/install/).
+
+  Para instalação do docker-compose siga as [instruções](https://docs.docker.com/compose/install/).
 
 ### PostgresSQL
   Para a execução desse projeto será necessário que você possua uma versão do postgres instalado.
@@ -34,8 +38,3 @@ Para a execução desse projeto será necessário as seguintes ferramentas:
   Para parar o contianer precisa ser utilizado o seguinte script:
   
   ```$ docker-compose stop```
-
-### Docker
-  Para a instalação do Docker siga as [instruções](https://docs.docker.com/engine/install/).
-
-  Para instalação do docker-compose siga as [instruções](https://docs.docker.com/compose/install/).
