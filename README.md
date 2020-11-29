@@ -1,4 +1,4 @@
-# property-rental
+# Property-rental
 Este projeto consiste no desenvolvimento de um serviço de aluguel de quartos e apartamentos, no formato AirBnb. O servidor deve fornecer serviços para o locador e o locatário. Utilizando a API de Sockets do Node.js para se comunicarem.
 
 
@@ -6,9 +6,8 @@ Este projeto consiste no desenvolvimento de um serviço de aluguel de quartos e 
 Para a execução desse projeto será necessário as seguintes ferramentas:
 
 - Obrigatórios
-  - [JDK](https://www.oracle.com/java/technologies/javase/jdk14-archive-downloads.html)
-  - [PostgresSQL](https://www.postgresql.org/)
-- Não obrigatórios, mas recomendados
+  - [Node](https://nodejs.org/en/)
+  - [PostgreSQL](https://www.postgresql.org/)
   - [Docker](https://docs.docker.com/)
 
 <!-- TABLE OF CONTENTS -->
