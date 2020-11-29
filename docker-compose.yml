@@ -1,10 +1,10 @@
 services:
 
-  db:
+  database:
     image: postgres
     environment:
       POSTGRES_USER: dm
-      POSTGRES_PASSWORD: 1amd2msakd833ksa
-      POSTGRES_DB: property-rental
+      POSTGRES_PASSWORD: 1d2w2km8d833ksa
+      POSTGRES_DB: propertyrental
     ports:
       - 5432:5432
