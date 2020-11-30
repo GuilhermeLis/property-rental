@@ -1,5 +1,7 @@
 const net = require("net");
 const newClientRequest = require("./routes/newClient")
+const properties = require("../querys/selectAllproperties")
+const  reservation = require ("../querys/reservation")
 
 const connectionListener = (socket) => {
 
@@ -13,6 +15,16 @@ const connectionListener = (socket) => {
         const { newClient } = object;
         await newClientRequest(newClient)
         socket.write('usuário adicionado')
+      }
+
+      if (operation === "listProperties"){
+        const result = await properties()
+        console.log(JSON.stringify(result))
+      }
+
+      if (operation === "reservation"){
+        const { properties, client } = object;
+        await reservation(properties, client)
       }
 
       

@@ -6,9 +6,9 @@ const client = net.Socket();
 const clientConnected = () => {
 
     
-    client.write('{"operation": "newClient", "newClient": "alberto"}');
+    // client.write('{"operation": "newClient", "newClient": "alberto"}');
 
-    client.write('{"operation": ""}')
+    client.write('{"operation": "listProperties"}')
     
 }
 
