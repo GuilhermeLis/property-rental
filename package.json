@@ -6,7 +6,8 @@
   "scripts": {
     "server": "node ./src/server/server.js",
     "client":"node ./src/client/client.js",
-    "run:migration": "yarn knex migrate:latest"
+    "run:migration": "yarn knex migrate:latest",
+    "seed": "yarn knex seed:run"
   },
   "dependencies": {
     "dotenv": "^8.2.0",

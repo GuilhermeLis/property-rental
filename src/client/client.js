@@ -6,12 +6,9 @@ const client = net.Socket();
 const clientConnected = () => {
 
     
-    client.write('{"operation": "newClient", "newClient": "gui"}');
-    
-    client.on("data", (data) => {
-        // console.log("Número aleatório: " + data.toString());
-        
-    });
+    client.write('{"operation": "newClient", "newClient": "alberto"}');
+
+    client.write('{"operation": ""}')
     
 }
 
