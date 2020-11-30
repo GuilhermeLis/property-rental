@@ -1,14 +1,22 @@
 const net = require("net");
-
-let number = 0;
+const newClientRequest = require("./routes/newClient")
 
 const connectionListener = (socket) => {
 
-    socket.on("data", (data) => {
-      if (data === "BREAK") socket.end();
+    socket.on("data", async (data) => {
+      const body = data.toString()
+      const object = JSON.parse(body);
+      const { operation } = object;
+      if (operation === "BREAK") socket.end();
 
-      number = number + 1
-      socket.write(number)
+      if (operation === "newClient"){
+        const { newClient } = object;
+        await newClientRequest(newClient)
+        socket.write('usuário adicionado')
+      }
+
+      
+      
       socket.end();
        
     });

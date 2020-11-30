@@ -1,11 +1,10 @@
-var { Client } = require('pg');
+const database = require('./database')
 
-module.exports = function() {
-  const client = new Client()
-  await client.connect()
+module.exports = async function() {
+  await database.connect()
 
   const result = await client.query('select * from properties')
 
-  await client.end()
+  await database.end()
   return result;
 }

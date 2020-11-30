@@ -6,12 +6,14 @@ const client = net.Socket();
 const clientConnected = () => {
 
     
-    client.on("data", (data) => {
-        console.log("Número aleatório: " + data.toString());
+    client.write('{"operation": "newClient", "newClient": "gui"}');
     
-        client.write("FINALIZA");
+    client.on("data", (data) => {
+        // console.log("Número aleatório: " + data.toString());
+        
     });
     
 }
 
-client.connect(3000, "192.168.0.110", clientConnected)
+//hostname -I
+client.connect(3000, "192.168.1.7", clientConnected)
