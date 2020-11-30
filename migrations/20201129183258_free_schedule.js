@@ -1,6 +1,6 @@
 
 exports.up = function(knex) {
-   return knex.schema.withSchema('public').createTable('free_schedule', (table) => {
+  return knex.schema.withSchema('public').createTable('free_schedule', (table) => {
       table.increments()
       table
           .integer('propertie_id')
@@ -11,7 +11,9 @@ exports.up = function(knex) {
           .onUpdate('CASCADE')
           .onDelete('CASCADE')
       table.datetime('schedule_date').notNullable()
-      })
+      table.boolean('available').default(true)
+      table.timestamps()
+  })
 };
 
 exports.down = function(knex) {

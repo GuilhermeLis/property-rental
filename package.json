@@ -5,9 +5,10 @@
   "license": "MIT",
   "scripts": {
     "start": "node .server/server.js",
-    "run:migration": "yarn knex migrate:up"
+    "run:migration": "yarn knex migrate:latest"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "knex": "^0.21.12",
     "pg": "^8.5.1",
     "sqlite3": "^5.0.0"
