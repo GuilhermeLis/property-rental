@@ -1,45 +1,59 @@
-const net = require("net");
 const newClientRequest = require("./routes/newClient")
 const properties = require("../querys/selectAllproperties")
 const  reservation = require ("../querys/reservation")
 
-const connectionListener = (socket) => {
+const PROTO_PATH = "./property-rental.proto";
 
-    socket.on("data", async (data) => {
-      const body = data.toString()
-      const object = JSON.parse(body);
-      const { operation } = object;
-      if (operation === "BREAK") socket.end();
+const grpc = require('grpc');
 
-      if (operation === "newClient"){
-        const { newClient } = object;
-        await newClientRequest(newClient)
-        socket.write('usuário adicionado')
-      }
+const protoLoader = require('@grpc/proto-loader');
 
-      if (operation === "listProperties"){
-        const result = await properties()
-        console.log(JSON.stringify(result))
-      }
+const packageDefinition = protoLoader.loadSync(
+    PROTO_PATH,
+    {keepCase: true,
+     longs: String,
+     enums: String,
+     defaults: true,
+     oneofs: true
+});
 
-      if (operation === "reservation"){
-        const { properties, client } = object;
-        await reservation(properties, client)
-      }
+var protoDescriptor = grpc.loadPackageDefinition(packageDefinition).propertyRental;
 
-      
-      
-      socket.end();
-       
-    });
 
-    socket.on("end", () => {
-        console.log("Cliente desconectado!");
-    });
+const newClient = (call, callback) => {
+  const { newClient } = call.request;
+  newClientRequest(newClient)
+
+  callback(null, {})
 }
 
-const server = net.createServer(connectionListener);
+const getProperties = async (call, callback) => {
+  const result = await properties();
 
-server.listen(3000, "0.0.0.0");
+  callback(null, {result})
+}
 
-console.log("server on")
+const makeResevantion = (call, callback) => {
+  const { properties, client } = call.request;
+  reservation(properties, client);
+
+  callback(null, {})
+}
+
+function getServer() {
+
+  var server = new grpc.Server();
+
+  server.addService(protoDescriptor.PropertyService.service, {
+    NewClient: newClient,
+    GetProperties: getProperties,
+    PutResevantion: makeResevantion
+  });
+
+  return server;
+}
+var routeServer = getServer();
+routeServer.bind('0.0.0.0:50051', grpc.ServerCredentials.createInsecure());
+routeServer.start();
+
+console.log("we're on")

@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package propertyRental;
+
+message PropertyRental {
+  int32 id = 1;
+  string country = 2;
+  string first_address = 3;
+  string second_address = 4;
+  string postal_code = 5;
+  string home_number =  6;
+  string city = 7;
+  string federative_unity = 8;
+  string neighbornhood = 9;
+  string comment = 10;
+  string created_at = 11;
+  string updated_at = 12;
+}
+
+message FreeSchedulePropertys {
+  int32 id = 1;
+  string propertie_id = 2;
+  string schedule_date = 3;
+}
+
+message NewClientPropertys {
+  string name = 1;
+}
+
+message ArrayPropertyRental {
+  repeated PropertyRental result = 1;
+}
+
+message MakeResevantion {
+  int32 properties = 1; 
+  int32 client = 2;
+}
+
+message Vazia { }
+
+service PropertyService {
+    rpc NewClient (NewClientPropertys) returns (Vazia);
+    rpc GetProperties (Vazia) returns (ArrayPropertyRental);
+    rpc PutResevantion (MakeResevantion) returns (Vazia);
+}

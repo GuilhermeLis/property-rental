@@ -1,16 +1,43 @@
+const PROTO_PATH = "./property-rental.proto";
 
-const net = require('net');
+const grpc = require('grpc');
 
-const client = net.Socket();
+const protoLoader = require('@grpc/proto-loader');
 
-const clientConnected = () => {
+const packageDefinition = protoLoader.loadSync(
+    PROTO_PATH,
+    {keepCase: true,
+     longs: String,
+     enums: String,
+     defaults: true,
+     oneofs: true
+});
 
-    
-    // client.write('{"operation": "newClient", "newClient": "alberto"}');
+var protoDescriptor = grpc.loadPackageDefinition(packageDefinition).propertyRental;
 
-    client.write('{"operation": "listProperties"}')
-    
-}
+const client = new protoDescriptor.PropertyService('localhost:50051', grpc.credentials.createInsecure());
 
-//hostname -I
-client.connect(3000, "192.168.1.7", clientConnected)
+// client.NewClient({name: 'rafael'}, (err, response) => {
+//     if (err !== null){
+//         console.log("Ocorreu um erro!")
+//         return;
+//     }
+//     console.log('Usuário cadastrado')
+// })
+
+client.GetProperties({}, (err, response) => {
+    if (err !== null){
+        console.log("Ocorreu um erro!")
+        return;
+    }
+
+    console.log(response.result)
+})
+
+// client.PutResevantion({properties, client},(err,response)=>{
+
+// })
+
+// client.write('{"operation": "newClient", "newClient": "alberto"}');
+
+    // client.write('{"operation": "listProperties"}')
