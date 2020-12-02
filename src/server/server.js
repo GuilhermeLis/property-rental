@@ -1,6 +1,7 @@
 const newClientRequest = require("./routes/newClient")
 const properties = require("../querys/selectAllproperties")
 const  reservation = require ("../querys/reservation")
+const seeFreeTime = require ("../querys/seeFreeTime")
 
 const PROTO_PATH = "./property-rental.proto";
 
@@ -40,6 +41,12 @@ const makeResevantion = async (call, callback) => {
   callback(null, {})
 }
 
+const getFreeTime = async (call, callback) => {
+  const freeschedule = await seeFreeTime();
+
+  callback(null, {freeschedule})
+}
+
 function getServer() {
 
   var server = new grpc.Server();
@@ -47,11 +54,13 @@ function getServer() {
   server.addService(protoDescriptor.PropertyService.service, {
     NewClient: newClient,
     GetProperties: getProperties,
-    PutResevantion: makeResevantion
+    PutResevantion: makeResevantion,
+    GetFreeTime: getFreeTime
   });
 
   return server;
 }
+
 var routeServer = getServer();
 routeServer.bind('0.0.0.0:50051', grpc.ServerCredentials.createInsecure());
 routeServer.start();

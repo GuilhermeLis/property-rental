@@ -19,8 +19,12 @@ message PropertyRental {
 
 message FreeSchedulePropertys {
   int32 id = 1;
-  string propertie_id = 2;
-  string schedule_date = 3;
+  string date = 2;
+  string city = 3;
+  string neighbornhood = 4;
+  string federative_unity = 5;
+  string country = 6;
+  string comment = 7;
 }
 
 message NewClientPropertys {
@@ -29,6 +33,10 @@ message NewClientPropertys {
 
 message ArrayPropertyRental {
   repeated PropertyRental result = 1;
+}
+
+message ArrayFreeSchedulePropertys {
+  repeated FreeSchedulePropertys freeschedule = 1;
 }
 
 message MakeResevantion {
@@ -42,4 +50,5 @@ service PropertyService {
     rpc NewClient (NewClientPropertys) returns (Vazia);
     rpc GetProperties (Vazia) returns (ArrayPropertyRental);
     rpc PutResevantion (MakeResevantion) returns (Vazia);
+    rpc GetFreeTime (Vazia) returns (ArrayFreeSchedulePropertys);
 }

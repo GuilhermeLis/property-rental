@@ -38,6 +38,15 @@ const client = new protoDescriptor.PropertyService('localhost:50051', grpc.crede
 //     console.log(response.result)
 // })
 
+// Aqui você vê os horários disponíveis de cada imovel
+// client.GetFreeTime({}, (err, response) => {
+//     if (err !== null){
+//         console.log("Ocorreu um erro!")
+//         return;
+//     }
+
+//     console.log(response.freeschedule)
+// })
 
 // Aqui você precisa colocar o id do cliente e o horário de agendamento
 
