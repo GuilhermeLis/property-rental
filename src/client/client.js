@@ -17,6 +17,8 @@ var protoDescriptor = grpc.loadPackageDefinition(packageDefinition).propertyRent
 
 const client = new protoDescriptor.PropertyService('localhost:50051', grpc.credentials.createInsecure());
 
+// Aqui você precisa adicionar o teu nome e descomentar o metodo
+
 // client.NewClient({name: 'rafael'}, (err, response) => {
 //     if (err !== null){
 //         console.log("Ocorreu um erro!")
@@ -25,19 +27,29 @@ const client = new protoDescriptor.PropertyService('localhost:50051', grpc.crede
 //     console.log('Usuário cadastrado')
 // })
 
-client.GetProperties({}, (err, response) => {
-    if (err !== null){
-        console.log("Ocorreu um erro!")
-        return;
-    }
+// Esse metodo vai listar todas as propriedades
 
-    console.log(response.result)
-})
+// const call = client.GetProperties({}, (err, response) => {
+//     if (err !== null){
+//         console.log("Ocorreu um erro!")
+//         return;
+//     }
 
-// client.PutResevantion({properties, client},(err,response)=>{
-
+//     console.log(response.result)
 // })
 
-// client.write('{"operation": "newClient", "newClient": "alberto"}');
+
+// Aqui você precisa colocar o id do cliente e o horário de agendamento
+
+// client.PutResevantion({ properties: 2, client: 1},(err,response)=>{
+//     if (err !== null){
+//         console.log("Ocorreu um erro!")
+//         return;
+//     }
+
+//     console.log('agendamento realizado')
+// })
+
 
     // client.write('{"operation": "listProperties"}')
+

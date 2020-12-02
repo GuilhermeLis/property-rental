@@ -20,9 +20,9 @@ const packageDefinition = protoLoader.loadSync(
 var protoDescriptor = grpc.loadPackageDefinition(packageDefinition).propertyRental;
 
 
-const newClient = (call, callback) => {
-  const { newClient } = call.request;
-  newClientRequest(newClient)
+const newClient = async (call, callback) => {
+  const { name } = call.request;
+  await newClientRequest(name)
 
   callback(null, {})
 }
@@ -33,9 +33,9 @@ const getProperties = async (call, callback) => {
   callback(null, {result})
 }
 
-const makeResevantion = (call, callback) => {
+const makeResevantion = async (call, callback) => {
   const { properties, client } = call.request;
-  reservation(properties, client);
+  await reservation(properties, client);
 
   callback(null, {})
 }
