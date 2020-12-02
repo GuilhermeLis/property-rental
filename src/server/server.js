@@ -1,7 +1,8 @@
-const net = require("net");
-const newClientRequest = require("./routes/newClient")
-const properties = require("../querys/selectAllproperties")
+const net = require ("net");
+const newClientRequest = require ("./routes/newClient")
+const properties = require ("../querys/selectAllproperties")
 const  reservation = require ("../querys/reservation")
+const seeFreeTime = require ("../querys/seeFreeTime")
 
 const connectionListener = (socket) => {
 
@@ -19,12 +20,17 @@ const connectionListener = (socket) => {
 
       if (operation === "listProperties"){
         const result = await properties()
-        console.log(JSON.stringify(result))
+        socket.write(JSON.stringify(result))
       }
 
       if (operation === "reservation"){
         const { properties, client } = object;
         await reservation(properties, client)
+      }
+
+      if (operation === "freeTime"){
+        const response = await seeFreeTime()
+        socket.write(JSON.stringify(response))
       }
 
       

@@ -12,6 +12,9 @@ const clientConnected = () => {
     // client.write('{"operation": "listProperties"}')
 
     // Aqui você podera fazer uma reserva 
+    // client.write('{"operation": "freeTime" }')
+
+    // Aqui você podera fazer uma reserva 
     // client.write('{"operation": "reservation", "properties": 1, client: 1 }')
    
 }
