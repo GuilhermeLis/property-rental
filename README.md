@@ -18,6 +18,7 @@ Para a execução desse projeto será necessário as seguintes ferramentas:
 - [PostgresSQL](#postgressql)
   - [Iniciar Container](#iniciar-container)
   - [Parar Container](#parar-container)
+- [Executando](#executando)
 
 ### Docker
   Para a instalação do Docker siga as [instruções](https://docs.docker.com/engine/install/).
@@ -38,3 +39,12 @@ Para a execução desse projeto será necessário as seguintes ferramentas:
   Para parar o contianer precisa ser utilizado o seguinte script:
   
   ```$ docker-compose stop```
+
+# Executando
+  Para ser realijado a execução corretamento o container já precisa está rodando apois isso você precisará executar os seguintes comandos na ordem que segue.
+
+  ```$ yarn run:migration```
+
+  ```$ yarn seed```
+
+  Pronto você já pode usar o aplicação, obrigado pela paciência.
