@@ -19,6 +19,9 @@ Para a execução desse projeto será necessário as seguintes ferramentas:
   - [Iniciar Container](#iniciar-container)
   - [Parar Container](#parar-container)
 
+- [Executando](#executando)
+- [Verificar IP](#verificar-ip)
+
 ### Docker
   Para a instalação do Docker siga as [instruções](https://docs.docker.com/engine/install/).
 
@@ -38,3 +41,20 @@ Para a execução desse projeto será necessário as seguintes ferramentas:
   Para parar o contianer precisa ser utilizado o seguinte script:
   
   ```$ docker-compose stop```
+
+# Executando
+  Para ser realijado a execução corretamento o container já precisa está rodando apois isso você precisará executar os seguintes comandos na ordem que segue.
+
+  ```$ yarn run:migration```
+
+  ```$ yarn seed```
+
+  Pronto você já pode usar o aplicação, obrigado pela paciência.
+
+# Verificando IP
+
+  No seu terminal rode o seguinte comando / caso use linux.
+
+  ```$ hostname -I```
+
+  colete o primeiro endereço IP que foi retornando na linha 20 do arquivo ./src/client/client.js

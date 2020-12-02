@@ -5,12 +5,16 @@ const client = net.Socket();
 
 const clientConnected = () => {
 
-    
-    // client.write('{"operation": "newClient", "newClient": "alberto"}');
+    // Aqui você precisa colocar o nome do usuário que você quer visualizar
+    // client.write('{"operation": "newClient", "newClient": "rafael"}');
 
-    client.write('{"operation": "listProperties"}')
-    
+    // Aqui você poderá vê as reservas disponíveis
+    // client.write('{"operation": "listProperties"}')
+
+    // Aqui você podera fazer uma reserva 
+    // client.write('{"operation": "reservation", "properties": 1, client: 1 }')
+   
 }
 
 //hostname -I
-client.connect(3000, "192.168.1.7", clientConnected)
+client.connect(3000, "COLOQUE SEU IP AQUI", clientConnected)
