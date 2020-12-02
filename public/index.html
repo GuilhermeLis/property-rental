@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body {
+            margin: 40px;
+            }
+
+            .wrapper {
+                display: grid;
+                grid-template-columns: 400px 400px;
+                grid-gap: 50px;
+                background-color: #fff;
+                color: #444;
+            }
+
+            .box {
+                background-color: #444;
+                color: #fff;
+                border-radius: 5px;
+                padding: 20px;
+                font-size: 150%;
+            }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="box a">A</div>
+        <div class="box b">B</div>
+        <div class="box c">C</div>
+        <div class="box d">D</div>
+      </div>
+</body>
+
+<script>
+    var options = {
+        url: 'https://rest-sd-2020-1.herokuapp.com/consulta',
+        // params: !acceptsData(method.value) ? getParams() : undefined,
+        // data: acceptsData(method.value) ? getData() : undefined,
+        method: 'GET',
+        // headers: getHeaders()
+    };
+
+    // axios.get()
+    axios(options)
+    .then(function (response) {
+        // handle success
+        console.log(response);
+
+        const data = response.data;
+
+        document.querySelector(".a").innerHTML = "<div><img src='" + data[0].foto + "' width=100 height=100><p>" + data[0].nome + " - R$" + data[0].preco + "</p></div>";
+
+        document.querySelector(".b").innerHTML = "<div><img src='" + data[1].foto + "' width=100 height=100><p>" + data[1].nome + " - R$" + data[1].preco + "</p></div>";
+
+        document.querySelector(".c").innerHTML = "<div><img src='" + data[2].foto + "' width=100 height=100><p>" + data[2].nome + " - R$" + data[2].preco + "</p></div>";
+
+        document.querySelector(".d").innerHTML = "<div><img src='" + data[3].foto + "' width=100 height=100><p>" + data[3].nome + " - R$" + data[3].preco + "</p></div>";
+    })
+    .catch(function (error) {
+        // handle error
+        console.log(error);
+    });
+
+</script>

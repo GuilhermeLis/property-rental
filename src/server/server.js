@@ -3,66 +3,52 @@ const properties = require("../querys/selectAllproperties")
 const  reservation = require ("../querys/reservation")
 const seeFreeTime = require ("../querys/seeFreeTime")
 
-const PROTO_PATH = "./property-rental.proto";
+const { response } = require('express');
+const express = require('express');
 
-const grpc = require('grpc');
+const app = express();
 
-const protoLoader = require('@grpc/proto-loader');
+const porta = process.env.PORT || 3000;
 
-const packageDefinition = protoLoader.loadSync(
-    PROTO_PATH,
-    {keepCase: true,
-     longs: String,
-     enums: String,
-     defaults: true,
-     oneofs: true
-});
+app.use(express.json());
 
-var protoDescriptor = grpc.loadPackageDefinition(packageDefinition).propertyRental;
+// middleware do express que inclui um caminho de arquivos estáticos e os serve
+app.use(express.static(process.env.PWD + '../../publicc'))
 
-
-const newClient = async (call, callback) => {
-  const { name } = call.request;
+app.post("/cadastroClient", async (req, res) => {
+  const { name } = req.body;
   await newClientRequest(name)
 
-  callback(null, {})
-}
+  res.send("{ result: 'OK' }");
+})
 
-const getProperties = async (call, callback) => {
+app.get("/properties", async (req, res) => {
   const result = await properties();
 
-  callback(null, {result})
-}
+  res.send( JSON.stringify(result) );
+})
 
-const makeResevantion = async (call, callback) => {
-  const { properties, client } = call.request;
-  await reservation(properties, client);
-
-  callback(null, {})
-}
-
-const getFreeTime = async (call, callback) => {
+app.get("/properties", async (req, res) => {
   const freeschedule = await seeFreeTime();
 
-  callback(null, {freeschedule})
-}
+  res.send( JSON.stringify(freeschedule) );
+})
 
-function getServer() {
+app.post("/cadastro", async (req, res) => {
+  const { properties, client } = req.body;
+  await reservation(properties, client);
 
-  var server = new grpc.Server();
+  res.send("{ result: 'OK, cadastrado' }");
+})
 
-  server.addService(protoDescriptor.PropertyService.service, {
-    NewClient: newClient,
-    GetProperties: getProperties,
-    PutResevantion: makeResevantion,
-    GetFreeTime: getFreeTime
-  });
 
-  return server;
-}
 
-var routeServer = getServer();
-routeServer.bind('0.0.0.0:50051', grpc.ServerCredentials.createInsecure());
-routeServer.start();
+app.get("/", (req, res) => {
+    // função que renderiza o conteúdo do diretório estático
+    console.log('here')
+    res.render("index");
+});
 
-console.log("we're on")
+app.listen(porta, () => {
+    console.log(`Servidor executando, na porta ${porta}`);
+});

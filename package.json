@@ -5,16 +5,15 @@
   "license": "MIT",
   "scripts": {
     "server": "node ./src/server/server.js",
-    "client": "node ./src/client/client.js",
     "run:migration": "yarn knex migrate:latest",
     "seed": "yarn knex seed:run"
   },
   "dependencies": {
-    "@grpc/proto-loader": "^0.5.5",
     "dotenv": "^8.2.0",
-    "grpc": "^1.24.4",
+    "express": "^4.17.1",
     "knex": "^0.21.12",
     "pg": "^8.5.1",
     "sqlite3": "^5.0.0"
-  }
+  },
+  "devDependencies": {}
 }
