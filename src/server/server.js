@@ -1,51 +1,49 @@
-const net = require ("net");
+var mqtt = require('mqtt');
+var server  = mqtt.connect('mqtt://test.mosquitto.org');
+
 const newClientRequest = require ("./routes/newClient")
 const properties = require ("../querys/selectAllproperties")
 const  reservation = require ("../querys/reservation")
 const seeFreeTime = require ("../querys/seeFreeTime")
 
-const connectionListener = (socket) => {
+const NEW_CARRO = 'new-client';
+const LIST_PROPERTIES = 'list-properties';
+const RESERVATION = 'reservation';
+const FREE_TIME = 'free-time';
 
-    socket.on("data", async (data) => {
-      const body = data.toString()
-      const object = JSON.parse(body);
-      const { operation } = object;
-      if (operation === "BREAK") socket.end();
 
-      if (operation === "newClient"){
+server.on('connect', function(data, message) {
+
+    server.subscribe(NEW_CARRO, function (err) {
+      if (!err) {
+            console.log("Conexão não foi realizada com sucesso");
+        }
+      switch (data){
+
+      case data:
+        const object = JSON.parse(message)
         const { newClient } = object;
         await newClientRequest(newClient)
-        socket.write('usuário adicionado')
-      }
-
-      if (operation === "listProperties"){
+        server.publish('usuário adicionado')
+        break;
+      
+      case data:
         const result = await properties()
-        socket.write(JSON.stringify(result))
-      }
+        server.publish(JSON.stringify(result))
+        break;
 
-      if (operation === "reservation"){
+      case data:
+        const object = JSON.parse(message)
         const { properties, client } = object;
         await reservation(properties, client)
-      }
+        break;
 
-      if (operation === "freeTime"){
+      case data:
         const response = await seeFreeTime()
-        socket.write(JSON.stringify(response))
-      }
+        server.publish(JSON.stringify(response))
+        break;
 
-      
-      
-      socket.end();
+      }
        
     });
-
-    socket.on("end", () => {
-        console.log("Cliente desconectado!");
-    });
 }
-
-const server = net.createServer(connectionListener);
-
-server.listen(3000, "0.0.0.0");
-
-console.log("server on")

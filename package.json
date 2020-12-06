@@ -5,13 +5,14 @@
   "license": "MIT",
   "scripts": {
     "server": "node ./src/server/server.js",
-    "client":"node ./src/client/client.js",
+    "client": "node ./src/client/client.js",
     "run:migration": "yarn knex migrate:latest",
     "seed": "yarn knex seed:run"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
     "knex": "^0.21.12",
+    "mqtt": "^4.2.6",
     "pg": "^8.5.1",
     "sqlite3": "^5.0.0"
   }
